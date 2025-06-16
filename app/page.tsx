@@ -139,14 +139,7 @@ export default function IPhone() {
               </div>
             </div>
             <div className="w-full h-full bg-black rounded-[3.5rem] overflow-hidden relative">
-              {/* Status Bar: transparent for HomeScreen, black for LockScreen and AppScreen */}
-              {currentScreen === "home" && (
-                <StatusBar background="transparent" />
-              )}
-              {currentScreen === "lock" && (
-                <StatusBar background="transparent" />
-              )}
-              {currentScreen === "app" && <StatusBar background="black" />}
+              <StatusBar />
               {/* Phone Background Image */}
               <div className="absolute inset-0 w-full h-full z-0 pointer-events-none select-none">
                 <Image
@@ -178,7 +171,7 @@ export default function IPhone() {
               )}
               {/* AppScreen overlays everything when in app mode */}
               {currentScreen === "app" && currentApp && (
-                <div className="absolute inset-0 z-30">
+                <div className="absolute inset-0 z-10">
                   <AppScreen
                     app={currentApp}
                     onBack={() => navigateToScreen("home")}

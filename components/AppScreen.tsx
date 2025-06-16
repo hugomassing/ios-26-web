@@ -57,9 +57,11 @@ export default function AppScreen({ app, onBack }: AppScreenProps) {
   };
 
   return (
-    <div className="w-full h-full bg-white flex flex-col pt-12">
+    <div className="w-full h-full flex flex-col bg-white">
       {/* App Content */}
-      <div className="flex-1 overflow-hidden">{getAppComponent(app.id)}</div>
+      <div className="flex-1 overflow-hidden h-full ">
+        {getAppComponent(app.id)}
+      </div>
     </div>
   );
 }
