@@ -18,7 +18,7 @@ import {
   Wifi,
   Battery,
   Signal,
-  Search,
+  Search as SearchIcon,
   Lock,
   Image,
   FileText,
@@ -43,6 +43,8 @@ import {
 } from "lucide-react";
 import Icon from "./Icon";
 import LiquidGlass from "./LiquidGlass";
+import Search from "./Search";
+import Dock from "./Dock";
 
 interface HomeScreenProps {
   onAppSelect: (app: AppData) => void;
@@ -383,46 +385,16 @@ export default function HomeScreen({
             </div>
           ) : (
             <div className="relative">
-              <LiquidGlass rounded="rounded-[2.5rem]" />
               <div className="w-full max-w-[280px] flex justify-center pointer-events-auto">
-                <div className="relative flex items-center gap-2 px-4 py-1.5 rounded-full shadow-md select-none liquidGlass-border">
-                  <Search className="w-4 h-4 text-white/90" />
-                  <span className="text-white/90 text-sm font-medium">
-                    Search
-                  </span>
-                </div>
+                <Search />
               </div>
             </div>
           )}
         </div>
       </div>
 
-      {/* Even Larger Dock, but with safe margins */}
-      <div
-        className="absolute left-1/2 transform -translate-x-1/2 w-full flex justify-center pointer-events-none"
-        style={{ bottom: 20 }}
-      >
-        <div
-          className="px-4 py-4 rounded-[2.5rem] shadow-2xl pointer-events-auto relative liquidGlass-border"
-          style={{
-            width: 375 - 32,
-          }}
-        >
-          <LiquidGlass rounded="rounded-[2.5rem]" />
-          <div className="flex justify-between">
-            {dockApps.map((app) => {
-              const IconComponent = getIcon(app.icon);
-              return (
-                <Icon
-                  key={app.id}
-                  icon={IconComponent}
-                  onClick={() => onAppSelect(app)}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </div>
+      {/* Dock */}
+      <Dock apps={dockApps} onAppSelect={onAppSelect} getIcon={getIcon} />
     </div>
   );
 }
