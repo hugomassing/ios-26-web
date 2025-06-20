@@ -43,22 +43,6 @@ export default function LockScreen({ onUnlock }: LockScreenProps) {
     };
   }, []);
 
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: false,
-    });
-  };
-
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString("en-US", {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
   const formatShortDate = (date: Date) => {
     return date
       .toLocaleDateString("en-US", {
@@ -87,14 +71,12 @@ export default function LockScreen({ onUnlock }: LockScreenProps) {
         scale: isUnlocking ? 3 : 1,
       }}
       transition={{ duration: 0.7, ease: [0.4, 2, 0.6, 1] }}
-      className={
-        "relative w-full h-full bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 overflow-hidden cursor-pointer pt-12"
-      }
+      className={"relative w-full h-full  overflow-hidden cursor-pointer pt-12"}
       onClick={handleUnlock}
     >
       {/* Background Image with 3D Parallax */}
       <Image
-        src="/lockscreen2.jpg"
+        src="/lockscreen-3.jpg"
         alt="Lock Screen Background"
         fill
         className="object-cover object-center z-0 select-none pointer-events-none"
@@ -108,17 +90,10 @@ export default function LockScreen({ onUnlock }: LockScreenProps) {
         }}
       />
 
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-400 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute bottom-32 right-8 w-40 h-40 bg-purple-400 rounded-full blur-xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-pink-400 rounded-full blur-xl animate-pulse delay-500"></div>
-      </div>
-
       {/* Top and Bottom Gradient Blur Overlays */}
       <div className="pointer-events-none select-none">
         {/* Top Gradient */}
-        <div className="absolute top-0 left-0 w-full h-32 z-10 bg-gradient-to-b from-black/70 to-transparent blur-xl" />
+        <div className="absolute top-0 left-0 w-full h-32 z-10 bg-gradient-to-b from-black/70 to-transparent" />
         {/* Bottom Gradient */}
         <div className="absolute bottom-0 left-0 w-full h-40 z-10 bg-gradient-to-t from-black/80 to-transparent blur-2xl" />
       </div>
@@ -135,18 +110,6 @@ export default function LockScreen({ onUnlock }: LockScreenProps) {
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white opacity-75">
         <ChevronUp className="w-6 h-6 mb-2 animate-bounce" />
         <p className="text-sm font-light">Tap to unlock</p>
-      </div>
-
-      {/* Quick Action Buttons */}
-      {/* Flashlight Button - Bottom Left */}
-      <div className="absolute bottom-8 left-6">
-        <QuickActionButton
-          icon={<Flashlight className="w-6 h-6 text-white" />}
-        />
-      </div>
-      {/* Camera Button - Bottom Right */}
-      <div className="absolute bottom-8 right-6">
-        <QuickActionButton icon={<Camera className="w-6 h-6 text-white" />} />
       </div>
     </motion.div>
   );

@@ -1,15 +1,8 @@
 "use client";
 
 import { AppData } from "@/app/page";
-import { ArrowLeft, Wifi, Battery, Signal } from "lucide-react";
-import MessagesApp from "@/components/apps/MessagesApp";
-import PhoneApp from "@/components/apps/PhoneApp";
-import MailApp from "@/components/apps/MailApp";
-import MusicApp from "@/components/apps/MusicApp";
-import CameraApp from "@/components/apps/CameraApp";
-import SettingsApp from "@/components/apps/SettingsApp";
-import MapsApp from "@/components/apps/MapsApp";
-import CalendarApp from "@/components/apps/CalendarApp";
+import { motion } from "framer-motion";
+import NoteApp from "./NoteApp";
 
 interface AppScreenProps {
   app: AppData;
@@ -17,51 +10,26 @@ interface AppScreenProps {
 }
 
 export default function AppScreen({ app, onBack }: AppScreenProps) {
-  const getAppComponent = (appId: string) => {
-    switch (appId) {
-      case "messages":
-        return <MessagesApp />;
-      case "phone":
-        return <PhoneApp />;
-      case "mail":
-        return <MailApp />;
-      case "music":
-        return <MusicApp />;
-      case "camera":
-        return <CameraApp />;
-      case "settings":
-        return <SettingsApp />;
-      case "maps":
-        return <MapsApp />;
-      case "calendar":
-        return <CalendarApp />;
-      default:
-        return (
-          <div className="flex-1 flex items-center justify-center">
-            <div className="text-center">
-              <div
-                className={`w-24 h-24 ${app.color} rounded-3xl mx-auto mb-4 flex items-center justify-center`}
-              >
-                <span className="text-white text-2xl font-bold">
-                  {app.name.charAt(0)}
-                </span>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                {app.name}
-              </h2>
-              <p className="text-gray-600">This is a demo app interface.</p>
-            </div>
-          </div>
-        );
-    }
-  };
-
   return (
-    <div className="w-full h-full flex flex-col bg-white">
-      {/* App Content */}
-      <div className="flex-1 overflow-hidden h-full ">
-        {getAppComponent(app.id)}
-      </div>
-    </div>
+    <motion.div
+      key={app.id}
+      initial={{ opacity: 0, scale: 1.1, y: "100%" }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: { duration: 0.4, ease: [0.25, 1, 0.5, 1] },
+      }}
+      exit={{
+        opacity: 0,
+        scale: 1.1,
+        y: "100%",
+        transition: { duration: 0.4, ease: [0.25, 1, 0.5, 1], delay: 0.1 },
+      }}
+      className="absolute inset-0 bg-white dark:bg-black z-10"
+      style={{ borderRadius: "3.5rem" }}
+    >
+      <NoteApp onBack={onBack} />
+    </motion.div>
   );
 }

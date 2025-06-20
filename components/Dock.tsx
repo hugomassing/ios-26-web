@@ -34,15 +34,15 @@ const Dock: React.FC<DockProps> = ({ apps, onAppSelect, getIcon }) => {
           style={{
             background: `linear-gradient(${angle}deg, rgba(255,255,255,0.6) 0% 40%, rgba(255,255,255,0.1) 60% 100%)`,
             clipPath: "url(#dock-mask)",
-            zIndex: 2,
+            zIndex: 4,
             filter: "blur(2px)",
           }}
         />
 
         {/* Inner content layer */}
-        <div className="px-4 py-4 rounded-[2.5rem] shadow-2xl pointer-events-auto relative">
+        <div className="px-4 py-4 rounded-[2.5rem] shadow-2xl pointer-events-auto relative z-[2]">
           <LiquidGlass rounded="rounded-[2.5rem]" />
-          <div className="flex justify-between">
+          <div className="flex justify-between relative z-10">
             {apps.map((app) => {
               const IconComponent = getIcon(app.icon);
               return (

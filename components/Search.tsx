@@ -29,13 +29,13 @@ const Search: React.FC<SearchProps> = ({ className = "" }) => {
         style={{
           background: `linear-gradient(${angle}deg, rgba(255,255,255,0.6) 0% 40%, rgba(255,255,255,0.1) 60% 100%)`,
           clipPath: "url(#search-mask)",
-          zIndex: 1,
+          zIndex: 4,
           filter: "blur(2px)",
         }}
       />
 
       {/* Inner content layer */}
-      <div className="relative flex items-center gap-2 px-4 py-1.5 rounded-full z-20">
+      <div className="relative flex items-center gap-2 px-4 py-1.5 rounded-full">
         <LiquidGlass rounded="rounded-full" />
         <SearchIcon className="w-4 h-4 text-white/90 z-20" />
         <span className="text-white/90 text-sm font-medium z-20">Search</span>
