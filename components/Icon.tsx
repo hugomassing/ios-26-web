@@ -61,15 +61,16 @@ const Icon: React.FC<IconProps> = ({
         <div
           className="absolute inset-0 transition-all duration-300"
           style={{
-            background: `linear-gradient(${angle}deg, rgba(255,255,255,0.6) 0% 40%, rgba(255,255,255,0.1) 60% 100%)`,
+            background: `linear-gradient(${angle}deg, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0) 17%, rgba(0, 0, 0, 0) 92%, rgba(255, 255, 255, 1) 100%)`,
             clipPath: "url(#icon-mask)",
             zIndex: 2,
+            filter: "blur(1px)",
           }}
         />
 
         {/* Inner content layer */}
         <div
-          className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-[1rem] border-[0.5px] border-transparent"
+          className="absolute inset-0 flex items-center justify-center rounded-[1rem] border-[0.5px] border-transparent"
           style={{
             zIndex: 1,
           }}

@@ -30,6 +30,7 @@ const Search: React.FC<SearchProps> = ({ className = "" }) => {
           background: `linear-gradient(${angle}deg, rgba(255,255,255,0.6) 0% 40%, rgba(255,255,255,0.1) 60% 100%)`,
           clipPath: "url(#search-mask)",
           zIndex: 1,
+          filter: "blur(2px)",
         }}
       />
 

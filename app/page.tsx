@@ -68,6 +68,33 @@ export default function IPhone() {
 
   return (
     <>
+      <svg width="100%" height="100%" style={{ display: "none" }}>
+        <defs>
+          <filter
+            id="glass-distortion"
+            x="0%"
+            y="0%"
+            width="100%"
+            height="100%"
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.008 0.008"
+              numOctaves="2"
+              seed="92"
+              result="noise"
+            />
+            <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="blurred"
+              scale="70"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+      </svg>
       {loading && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
           <div className="w-16 h-16 rounded-full border-4 border-white/30 border-t-blue-400 animate-spin"></div>
