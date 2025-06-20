@@ -58,6 +58,23 @@ export default function HomeScreen({
   currentScreen,
 }: HomeScreenProps) {
   const [currentTime] = useState("9:41");
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  // Detect touch device on mount
+  useEffect(() => {
+    const checkTouchDevice = () => {
+      setIsTouchDevice(
+        "ontouchstart" in window ||
+          navigator.maxTouchPoints > 0 ||
+          // @ts-ignore
+          (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0)
+      );
+    };
+
+    checkTouchDevice();
+    window.addEventListener("resize", checkTouchDevice);
+    return () => window.removeEventListener("resize", checkTouchDevice);
+  }, []);
 
   // Define pages as an array of arrays, each sub-array is a page
   const pages: AppData[][] = [
@@ -304,31 +321,35 @@ export default function HomeScreen({
         <div
           ref={scrollRef}
           className={`flex w-full h-[560px] overflow-x-auto overflow-y-hidden scrollbar-hide ${
-            !uiDragging ? "snap-x snap-mandatory" : ""
+            !uiDragging || isTouchDevice ? "snap-x snap-mandatory" : ""
           } ${uiDragging ? "select-none" : ""}`}
           style={{
             WebkitOverflowScrolling: "touch",
             touchAction: "pan-x",
             scrollbarWidth: "none",
             msOverflowStyle: "none",
-            ...(!uiDragging && {
-              scrollSnapType: "x mandatory",
-              WebkitScrollSnapType: "x mandatory",
-            }),
+            ...(!uiDragging || isTouchDevice
+              ? {
+                  scrollSnapType: "x mandatory",
+                  WebkitScrollSnapType: "x mandatory",
+                }
+              : {}),
           }}
           onScroll={handleScroll}
-          onPointerDown={handlePointerDown}
+          onPointerDown={isTouchDevice ? undefined : handlePointerDown}
         >
           {pages.map((apps, pageIdx) => (
             <div
               key={pageIdx}
               className={`min-w-full min-w-[320px] h-full flex flex-col items-center justify-start relative px-8 ${
-                !uiDragging ? "snap-center" : ""
+                !uiDragging || isTouchDevice ? "snap-center" : ""
               }`}
               style={{
-                ...(!uiDragging && {
-                  scrollSnapAlign: "center",
-                }),
+                ...(!uiDragging || isTouchDevice
+                  ? {
+                      scrollSnapAlign: "center",
+                    }
+                  : {}),
               }}
             >
               {/* Invisible background to capture pointer events */}
