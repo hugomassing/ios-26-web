@@ -26,10 +26,12 @@ export const useMouseAngle = () => useContext(MouseAngleContext);
 
 interface MouseAngleProviderProps {
   children: React.ReactNode;
+  showDebug?: boolean;
 }
 
 export const MouseAngleProvider: React.FC<MouseAngleProviderProps> = ({
   children,
+  showDebug = false,
 }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -170,7 +172,7 @@ export const MouseAngleProvider: React.FC<MouseAngleProviderProps> = ({
       value={{ angle, isHovered, hasPermission, requestPermission }}
     >
       {children}
-      {isClient && (
+      {isClient && showDebug && (
         <DebugOverlay
           beta={beta}
           gamma={gamma}

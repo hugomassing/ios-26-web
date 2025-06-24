@@ -8,7 +8,7 @@ interface NoteAppProps {
 
 const NoteApp = ({ onBack }: NoteAppProps) => {
   const handleContactMe = () => {
-    window.open("mailto:hugo@example.com", "_blank");
+    window.open("https://www.linkedin.com/in/hugomassing", "_blank");
   };
 
   const wavyBackground =
